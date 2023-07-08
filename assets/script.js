@@ -3,13 +3,18 @@ var startbutton = document.querySelector('#start');
 
 var gameTimer = function() {
     console.log('gameTimer is starting');
-    var minute = 18;
+    var minute = 17;
     var sec = 60;
     setInterval(function() {
         document.querySelector("#timer").innerHTML = minute + ":" + sec; 
         sec--;
 
-        if (sec == 0o0) {
+        if (sec < 10) {
+            document.querySelector("#timer").innerHTML = minute + ":0" + sec; 
+            sec--; 
+        }
+
+        if (sec === 0) {
             //how to make the seconds part display 09, 08, 05 etc?
             minute--;
             sec = 60;
