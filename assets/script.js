@@ -1,34 +1,33 @@
 var startbutton = document.querySelector('#start');
-//why did getElementById not work?
+var countdownEl = document.getElementById("timer");
 
-var gameTimer = function() {
-    console.log('gameTimer is starting');
-    var minute = 17;
-    var sec = 60;
-    setInterval(function() {
-        document.querySelector("#timer").innerHTML = minute + ":" + sec; 
-        sec--;
+var startingMinutes = 1;
+var time = startingMinutes * 60;
 
-        if (sec < 10) {
-            document.querySelector("#timer").innerHTML = minute + ":0" + sec; 
-            sec--; 
-        }
-
-        if (sec === 0) {
-            //how to make the seconds part display 09, 08, 05 etc?
-            minute--;
-            sec = 60;
-
-            if (minute === 0) {
-                document.querySelector('#timer').innerHTML = 'Game Over';
-                console.log('game over');
-                //function to erase page and display EoE image with try again button
-            }
-        }
-    }, 1000);
-};
+var lose = function(){
+    document.getElementById('main').display = none;
+    document.querySelector('#lose').display = block;
+}
+var win = function(){
+    document.querySelector('.win').display = block;
+}
 
 startbutton.addEventListener('click', function() {
     console.log('event listener works');
-    gameTimer();
+    setInterval(function() {
+        var minutes = Math.floor(time / 60);
+        var seconds = time % 60;
+    
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        } 
+    
+        countdownEl.innerHTML = minutes + ':' + seconds;
+        time--;
+    
+        if (time === 0) {
+            clearInterval();
+            lose();
+        }
+    }, 1000);
 });
