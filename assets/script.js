@@ -3,7 +3,7 @@ var countdownEl = document.getElementById("timer");
 var letterSection = document.querySelector('.letter-buttons');
 
 var startingMinutes = 1;
-var time = startingMinutes * 10;
+var time = startingMinutes * 60;
 
 var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
@@ -13,6 +13,7 @@ var lose = function(){
 }
 
 var win = function(){
+    document.getElementById('main').style.display = 'none';
     document.querySelector('.win').style.display = 'block';
 }
 
@@ -38,8 +39,21 @@ var wordBank = [
 
 let wordIndex = getRandomIndex (wordBank);
 
+function displayGame() {
+
+}
+
+function clickLetters() {
+    var allBtns = document.querySelector('.letter-buttons').children;
+    console.log(allBtns.innerHTML);
+    // allBtns.forEach(function(btn) {
+    //     btn.addEventListener('click', function(){
+    //         console.log('checkLetters function is selecting the letter buttons')
+    //     })
+    // })
+}
+
 function writeButtons() {
-    console.log('writing the game buttons');
     for (var i = 0; i < letters.length; i++) {
         var buttons = document.createElement('button');
         buttons.textContent = letters[i];
@@ -48,8 +62,6 @@ function writeButtons() {
 }
 
 function timeLimit() {
-    console.log('event listener works');
-    
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;
 
@@ -77,4 +89,5 @@ function timeLimit() {
 startbutton.addEventListener('click', function() {
     timeLimit();
     writeButtons();
+    clickLetters();
 });
