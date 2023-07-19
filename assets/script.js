@@ -1,4 +1,4 @@
-var startbutton = document.querySelector('#start');
+var startButton = document.querySelector('#start');
 var countdownEl = document.getElementById("timer");
 var letterSection = document.querySelector('.letter-buttons');
 
@@ -39,33 +39,43 @@ var wordBank = [
 
 let wordIndex = getRandomIndex (wordBank);
 
-function displayGame() {
+function displayMan() {
 
 }
 
+//this function is selecting all the letter buttons and listening for a click on them
 function clickLetters() {
-    var allBtns = document.querySelector('.letter-buttons').children;
+    var allBtns = document.querySelectorAll('.char');
+    allBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(){
+            console.log('checkLetters function is selecting the letter buttons')
+            console.log(this.textContent);
+        })
+    })
     console.log(allBtns.innerHTML);
-    // allBtns.forEach(function(btn) {
-    //     btn.addEventListener('click', function(){
-    //         console.log('checkLetters function is selecting the letter buttons')
-    //     })
-    // })
+    // function checkAnswer() {
+    //     if (this.textContent === wordBank[wordIndex].hint)
+    // }
+
+
 }
 
+//this function is looping through the letters array and making buttons for each item in the array and adding them to the html file
 function writeButtons() {
     for (var i = 0; i < letters.length; i++) {
         var buttons = document.createElement('button');
         buttons.textContent = letters[i];
         letterSection.appendChild(buttons);
+        buttons.classList.add('char');
     }
 }
 
+//this function runs the timer for the quiz and displays the time like a digital clock
 function timeLimit() {
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;
 
-    countdownEl.innerHTML = minutes + ':' + seconds;
+    countdownEl.innerHTML = minutes + ':0' + seconds;
 
     var timer = setInterval(function() {
         time--;
@@ -86,7 +96,14 @@ function timeLimit() {
     }, 1000);
 }
 
-startbutton.addEventListener('click', function() {
+//this function hides the begin button
+function hideBtn () {
+    startButton.setAttribute('style', 'display:none');
+}
+
+//this event listenet listens to the begin button and calls functions to begin the game
+startButton.addEventListener('click', function() {
+    hideBtn();
     timeLimit();
     writeButtons();
     clickLetters();
