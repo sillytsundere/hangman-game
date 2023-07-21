@@ -11,27 +11,55 @@ var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
 
 var wordBank = [
     {
-        word: 'PARSNIP',
-        hint: 'Dissappointing root vegatable.'
+        word: 'SHINJI',
+        hint: 'crybaby'
     },
     {
-        word: 'APPLE',
-        hint: 'Nothing worse than finding a worm in this'
+        word: 'LILITH',
+        hint: 'the second angel'
     },
     {
-        word: 'CRAYON',
-        hint: 'Not a crown'
+        word: 'ADAM',
+        hint: 'the third angel'
+    },
+    {
+        word: 'MISATO',
+        hint: 'worlds best adoptive mom'
+    },
+    {
+        word: 'SACHIEL',
+        hint: 'the 3rd angel'
+    },
+    {
+        word: 'RAMIEL',
+        hint: 'best girl angel'
+    },
+    {
+        word: 'KAWORU',
+        hint: 'boyfriend'
+    },
+    {
+        word: 'KAJI',
+        hint: 'the dude with the watermelons'
+    },
+    {
+        word: 'SEELE',
+        hint: 'evil corp'
+    },
+    {
+        word: 'NERV',
+        hint: 'all is right with the world'
     }
 ]
 
-var lose = function(){
+var loseDisplay = function(){
     document.getElementById('main').style.display = 'none';
-    document.querySelector('#lose').style.display = 'block';
+    document.getElementById('lose').style.display = 'block';
 }
 
-var win = function(){
+var winDisplay = function(){
     document.getElementById('main').style.display = 'none';
-    document.querySelector('.win').style.display = 'block';
+    document.getElementById('win').style.display = 'block';
 }
 
 function getRandomIndex (arr) {
@@ -42,7 +70,7 @@ function getRandomIndex (arr) {
 function startGame() {
     console.log('hello');
     wordIndex = getRandomIndex(wordBank);
-    turns = 8;
+    turns = 7;
     roundWord = wordBank[wordIndex].word.split('');
     hideBtn();
     timeLimit();
@@ -58,6 +86,10 @@ function clickLetters() {
         btn.addEventListener('click', function(){
             //console.log(this.innerHTML); matches console.log(inputChar);
             console.log(checkAnswer(this.innerHTML));
+            if (roundWord.length === 0) {
+                console.log('you win');
+                winDisplay();
+            }
         })
     })
 }
@@ -87,6 +119,7 @@ function updateGame() {
     console.log(turns, 'turns');
     if (turns <= 0) {
         console.log('gameover');
+        loseDisplay();
     } else {
         console.log(roundWord);
     }
@@ -127,7 +160,10 @@ function timeLimit() {
     
         if (time <= 0) {
             clearInterval(timer);
-            lose();
+            loseDisplay();
+        }
+        if (roundWord.length === 0) {
+            clearInterval(timer);
         }
     }, 1000);
 }
