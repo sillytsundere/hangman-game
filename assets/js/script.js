@@ -1,11 +1,14 @@
 var startButton = document.querySelector('#start');
 var countdownEl = document.getElementById("timer");
+var turnsHolder = document.getElementById('my-turns');
+var wordHolder = document.getElementById('word-place');
 
 var startingMinutes = 1;
 var time = startingMinutes * 60;
 let wordIndex;
 let turns;
 let roundWord;
+let wordStatus = null;
 
 var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
@@ -20,7 +23,7 @@ var wordBank = [
     },
     {
         word: 'ADAM',
-        hint: 'the third angel'
+        hint: 'the first angel'
     },
     {
         word: 'MISATO',
@@ -68,15 +71,22 @@ function getRandomIndex (arr) {
 }
 
 function startGame() {
-    console.log('hello');
     wordIndex = getRandomIndex(wordBank);
     turns = 7;
+    turnsHolder.innerHTML = `0${turns}`;
     roundWord = wordBank[wordIndex].word.split('');
+    console.log(roundWord, 'round word');
     hideBtn();
     timeLimit();
     writeButtons();
     clickLetters();
+    writeWord();
 
+}
+
+function writeWord() {
+    wordStatus = roundWord.map(guessedChar => (roundWord.indexOf(guessedChar) >= 0 ? " _ " : guessedChar)).join('');
+    wordHolder.innerHTML = wordStatus;
 }
 
 //this function is selecting all the letter buttons and listening for a click on them
@@ -84,7 +94,6 @@ function clickLetters() {
     var allBtns = document.querySelectorAll('.char');
     allBtns.forEach(function(btn) {
         btn.addEventListener('click', function(){
-            //console.log(this.innerHTML); matches console.log(inputChar);
             console.log(checkAnswer(this.innerHTML));
             if (roundWord.length === 0) {
                 console.log('you win');
@@ -95,7 +104,6 @@ function clickLetters() {
 }
 
 function checkAnswer(inputChar) {
-    // console.log(inputChar);
     for (var i = 0; i < roundWord.length; i++) {
         if (inputChar === roundWord[i]) {
 
@@ -106,6 +114,7 @@ function checkAnswer(inputChar) {
             var temp1 = roundWord.slice(indexToRemove +1);
             
             roundWord = temp.concat(temp1);
+            console.log(roundWord);
     
             return true;
         }
@@ -116,6 +125,7 @@ function checkAnswer(inputChar) {
 
 function updateGame() {
     turns--;
+    turnsHolder.innerHTML = `0${turns}`;
     console.log(turns, 'turns');
     if (turns <= 0) {
         console.log('gameover');
@@ -124,9 +134,6 @@ function updateGame() {
         console.log(roundWord);
     }
 }
-
-//create new var holds chosen word, make it an array, 
-//make function that sets up game 
 
 //this function is looping through the letters array and making buttons for each item in the array and adding them to the html file
 function writeButtons() {
@@ -177,19 +184,6 @@ function hideBtn () {
 startButton.addEventListener('click', 
     startGame
 );
-
-//Initialize function
-//change html elements
-//get a random word from bank and set it to a global variable that is spliced to be an array of that word ex: banana ---> ["b", "a", "n", "a", "n", "a"]
-//set turns to 0
-
-//on click of letter event listener
-// check to see if clicked letter is in the global varaiable holding the current word
-// if it is, remove a single instance of that letter from the array
-// if it is not, add a turn
-// if turns = 6, game over - add a reset button on game over]
-
-//make function for turns left 
 
 //make function to "draw out hanged man"
 // function displayMan() {

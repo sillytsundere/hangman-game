@@ -14,24 +14,24 @@
     <main>
         <div id="main" style="border-style: dashed; display:block">
             
-            <section>
+            <section style="border-style: dashed">
                 <p>Guessing a wrong letter will make the Hanged Man appear. The world will end if the timer runs out, you run out of turns or if the entire image is revealed.</p>
             </section>
 
-            <section class="begin">
+            <section class="begin" style="border-style: dashed">
                 <p>Press the button to begin</p>
                 <button id="start">Begin</button>
                 <div id="timer"></div>
             </section>
 
-            <section class="word"> 
+            <section class="word" style="border-style: dashed"> 
                 <a>hangman image will go here</a>
-                <p class="word-place"></p>
+                <p id="word-place"></p>
                 <div class="letter-buttons"></div>
-                <p id="mylives"></p>
             </section>
 
-            <section class="hint" style="display:none">
+            <section class="hint" style="border-style: dashed">
+                <p id="my-turns"></p>
                 <button class="hintbtn">Need a hint?</button>
                 <a class="hint-text"></a>
             </section>
