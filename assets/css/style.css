@@ -1,5 +1,17 @@
-body {
+/* body {
     background-image: url(../images/the-perfect-freedom.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
+} */
+
+
+.underline {
+    display: inline-block;
+    margin-right: 5px;
+    border-bottom: 2px solid black;
+    min-width: 20px;
+}
+
+.hidden {
+    color: transparent;
 }
