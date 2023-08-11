@@ -2,8 +2,9 @@ const startButton = document.querySelector('#start');
 const countdownEl = document.getElementById("timer");
 const turnsHolder = document.getElementById('my-turns');
 const wordHolder = document.getElementById('word-place');
+const wrongLetters = document.getElementById('wrong-letters');
 
-var startingMinutes = 1;
+var startingMinutes = 7;
 var time = startingMinutes * 60;
 let wordIndex;
 let turns;
@@ -25,6 +26,10 @@ var wordBank = [
     {
         word: 'ADAM',
         hint: 'the first angel'
+    },
+    {
+        word: 'ASUKA',
+        hint: 'the third child'
     },
     {
         word: 'MISATO',
@@ -53,6 +58,10 @@ var wordBank = [
     {
         word: 'NERV',
         hint: 'all is right with the world'
+    },
+    {
+        word: 'GENDO',
+        hint: 'the worst dad'
     }
 ]
 
@@ -110,7 +119,7 @@ function clickLetters() {
             console.log(checkAnswer(this.innerHTML));
             if (roundWord.length === 0) {
                 console.log('you win');
-                winDisplay();
+                setTimeout(() =>  {winDisplay()}, 850);
             }
         })
     })
@@ -123,42 +132,40 @@ function clickLetters() {
 //     console.log('update word');
 //     //need to have index of correct letter in word array and then push or replace it to its correct place to display on webpage
 // }
+function removeLetters(inputChar) {
+    var indexToRemove = roundWord.indexOf(inputChar);
+            console.log(indexToRemove, 'index of char to be removed');
+            var temp = roundWord.slice(0, indexToRemove);
+            var temp1 = roundWord.slice(indexToRemove +1);
+            roundWord = temp.concat(temp1);
 
+            if (roundWord.includes(inputChar)) {
+                removeLetters(inputChar);
+            }
+}
 
 function checkAnswer(inputChar) {
     for (var i = 0; i < roundWord.length; i++) {
         if (inputChar === roundWord[i]) {
             console.log(roundWord[i], 'before index is removed');
 
-            //remove one char of that from roundWord
-            var indexToRemove = roundWord.indexOf(inputChar);
-            console.log(indexToRemove, 'index of char to be removed');
-            var temp = roundWord.slice(0, indexToRemove);
-            var temp1 = roundWord.slice(indexToRemove +1);
-            
-            roundWord = temp.concat(temp1);
-            console.log(roundWord, 'after index is removed');
-
-            // console.log(wordStatus, 'word status in check answer ftn');
+            //remove all instances of that char from roundWord
+            removeLetters(inputChar);
 
             var chars = wordHolder.children;
             for (var i = 0; i < chars.length; i++) {
-                console.log(chars);
                 if (inputChar == chars[i].textContent) {
                     chars[i].classList.remove('hidden');
                 }
             }
-            //new global variable that is original word
-            //display that char at correct index in word status
-            //identify char selected and if it is correct
-            //push it to word status array at appropriate index
-            //join word status to display
-            //will I need to do this in a new function?
-    
             return true;
         }
     }
     updateGame();
+    console.log(inputChar,'incorrect letter');
+    var incorrectLet = document.createElement('p');
+    incorrectLet.innerHTML = inputChar;
+    wrongLetters.appendChild(incorrectLet);
     return false;
 }
 
@@ -225,6 +232,4 @@ startButton.addEventListener('click',
 );
 
 //make function to "draw out hanged man"
-// function displayMan() {
-
-// }
+// function displayMan()
