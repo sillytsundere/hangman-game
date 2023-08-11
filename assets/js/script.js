@@ -125,16 +125,9 @@ function clickLetters() {
     })
 }
 
-//need to make function to push letters that are guessed correctly to the word status array 
-//will want to use .replace to add the correct letters to the dashed word array
-// function updateWord() {
-//     console.log(wordStatus, 'wordStatus in updateWord ftn');
-//     console.log('update word');
-//     //need to have index of correct letter in word array and then push or replace it to its correct place to display on webpage
-// }
+//remove all instances of that char from roundWord
 function removeLetters(inputChar) {
     var indexToRemove = roundWord.indexOf(inputChar);
-            console.log(indexToRemove, 'index of char to be removed');
             var temp = roundWord.slice(0, indexToRemove);
             var temp1 = roundWord.slice(indexToRemove +1);
             roundWord = temp.concat(temp1);
@@ -144,12 +137,11 @@ function removeLetters(inputChar) {
             }
 }
 
+//checks if letter user has clicked is in the round word and removes instances of it as well as writes the letter to the display
 function checkAnswer(inputChar) {
     for (var i = 0; i < roundWord.length; i++) {
         if (inputChar === roundWord[i]) {
-            console.log(roundWord[i], 'before index is removed');
 
-            //remove all instances of that char from roundWord
             removeLetters(inputChar);
 
             var chars = wordHolder.children;
