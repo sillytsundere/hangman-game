@@ -3,6 +3,8 @@ const countdownEl = document.getElementById("timer");
 const turnsHolder = document.getElementById('my-turns');
 const wordHolder = document.getElementById('word-place');
 const wrongLetters = document.getElementById('wrong-letters');
+const hintText = document.getElementById('hint-text');
+const hintBtn = document.getElementById('hint-btn');
 
 var startingMinutes = 7;
 var time = startingMinutes * 60;
@@ -89,6 +91,7 @@ function startGame() {
     roundWord = wordBank[wordIndex].word.split('');
     showWord = wordBank[wordIndex].word.split('');
     console.log(roundWord, 'round word');
+    hintBtn.setAttribute('style', 'visibility:visible');
     hideBtn();
     timeLimit();
     writeButtons();
@@ -213,10 +216,21 @@ function timeLimit() {
     }, 1000);
 }
 
+function displayHint () {
+    roundHint = wordBank[wordIndex].hint;
+    console.log(roundHint);
+    hintText.innerHTML = wordBank[wordIndex].hint;
+    hintText.setAttribute('style', 'visibility:visible');
+}
+
 //this function hides the begin button
 function hideBtn () {
     startButton.setAttribute('style', 'display:none');
 }
+
+hintBtn.addEventListener('click',
+    displayHint    
+);
 
 //this event listenet listens to the begin button and calls functions to begin the game
 startButton.addEventListener('click', 
