@@ -11,7 +11,6 @@ var time = startingMinutes * 60;
 let wordIndex;
 let turns;
 let roundWord;
-//let wordStatus = null;
 let showWord;
 
 var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -67,11 +66,13 @@ var wordBank = [
     }
 ]
 
+//hides game display and shows lose div if game lose conditiosns met
 var loseDisplay = function(){
     document.getElementById('main').style.display = 'none';
     document.getElementById('lose').style.display = 'block';
 }
 
+//hides game display and shows win div if game win condition is met
 var winDisplay = function(){
     document.getElementById('main').style.display = 'none';
     document.getElementById('win').style.display = 'block';
@@ -88,9 +89,9 @@ function startGame() {
     wordIndex = getRandomIndex(wordBank);
     turns = 7;
     turnsHolder.innerHTML = `0${turns}`;
+    //picks random word for the game round and splits the atring into an array
     roundWord = wordBank[wordIndex].word.split('');
     showWord = wordBank[wordIndex].word.split('');
-    console.log(roundWord, 'round word');
     hintBtn.setAttribute('style', 'visibility:visible');
     hideBtn();
     timeLimit();
@@ -119,9 +120,8 @@ function clickLetters() {
     const allBtns = document.querySelectorAll('.char');
     allBtns.forEach(function(btn) {
         btn.addEventListener('click', function(){
-            console.log(checkAnswer(this.innerHTML));
+            checkAnswer(this.innerHTML);
             if (roundWord.length === 0) {
-                console.log('you win');
                 setTimeout(() =>  {winDisplay()}, 850);
             }
         })
@@ -157,7 +157,7 @@ function checkAnswer(inputChar) {
         }
     }
     updateGame();
-    console.log(inputChar,'incorrect letter');
+    //game is updated and if a letter is incorrect it is written to the Incorrect letters array and displayed on the page
     var incorrectLet = document.createElement('p');
     incorrectLet.innerHTML = inputChar;
     wrongLetters.appendChild(incorrectLet);
@@ -167,12 +167,8 @@ function checkAnswer(inputChar) {
 function updateGame() {
     turns--;
     turnsHolder.innerHTML = `0${turns}`;
-    console.log(turns, 'turns');
     if (turns <= 0) {
-        console.log('gameover');
         loseDisplay();
-    } else {
-        console.log(roundWord);
     }
 }
 
@@ -216,11 +212,12 @@ function timeLimit() {
     }, 1000);
 }
 
+//displays hint on page when hint button is clicked
 function displayHint () {
     roundHint = wordBank[wordIndex].hint;
-    console.log(roundHint);
     hintText.innerHTML = wordBank[wordIndex].hint;
     hintText.setAttribute('style', 'visibility:visible');
+    hintBtn.setAttribute('style', 'display:none');
 }
 
 //this function hides the begin button
@@ -228,11 +225,12 @@ function hideBtn () {
     startButton.setAttribute('style', 'display:none');
 }
 
+//event listener for hint button
 hintBtn.addEventListener('click',
     displayHint    
 );
 
-//this event listenet listens to the begin button and calls functions to begin the game
+//this event listener listens to the begin button and calls functions to begin the game
 startButton.addEventListener('click', 
     startGame
 );
