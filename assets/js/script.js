@@ -6,7 +6,7 @@ const wrongLetters = document.getElementById('wrong-letters');
 const hintText = document.getElementById('hint-text');
 const hintBtn = document.getElementById('hint-btn');
 
-var startingMinutes = 7;
+var startingMinutes = 30;
 var time = startingMinutes * 60;
 let wordIndex;
 let turns;
