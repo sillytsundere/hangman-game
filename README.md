@@ -27,13 +27,15 @@
 - When a user refreshes or returns to the brower page, the win counts should persist.
 
 ## Usage
+Deployed site can be reached [here](https://sillytsundere.github.io/hangman-game/).
+
 Users can play a simple hangman game by clicking the "Begin" button. Users must guess the word by clicking or typing letters to spell the correct word. The game is themed with words/names from the anime Neon Genesis Evangelion. 
+
+![Home Page before game starts](assets/images/before-game-start.png)
 
 Users have 7 lives, meaning if they guess a letter incorrectly 7 times then they lose. The game is also timed and the user must guess the word correctly within the alotted time or they will lose. The number of times a user has won will display at the top of the page and will persist in local storage until the user clicks the "Reset" button to reset their win count. 
 
 Users can click the "Need a hint" button to be given a succinct hint about the word they are guessing. These are largely helpful if you have seen the show and are familiar with the show's meme culture. 
-
-![Home Page before game starts](assets/images/before-game-start.png)
 
 ![Screenshot of game being played](assets/images/mid-game-shot.png)
 
