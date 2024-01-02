@@ -8,6 +8,7 @@ const hintBtn = document.getElementById("hint-btn");
 const header = document.getElementById("header");
 const oneMoreFinalBtn = document.getElementById("win-btn");
 const takeCareBtn = document.getElementById("lose-btn");
+const resetBtn = document.getElementById("reset");
 
 var startingMinutes = 30;
 var time = startingMinutes * 60;
@@ -15,6 +16,7 @@ let wordIndex;
 let turns;
 let roundWord;
 let showWord;
+let wins = localStorage.getItem('hangmanWins') || 0;
 
 var letters = [
   "A",
@@ -95,6 +97,11 @@ var wordBank = [
     hint: "the worst dad",
   },
 ];
+
+function winRecord() {
+  var winDiv = document.getElementById("wins")
+  winDiv.textContent = "Wins: " + wins;
+}
 
 //hides game display and shows lose div if game lose conditiosns met
 var loseDisplay = function () {
@@ -178,29 +185,6 @@ function removeLetters(inputChar) {
 
 //checks if letter user has clicked is in the round word and removes instances of it as well as writes the letter to the display
 function checkAnswer(inputChar) {
-
-  // inputChar = inputChar.toUpperCase();
-
-  // for (var i = 0; i < roundWord.length; i++) {
-  //   if (inputChar === roundWord[i]) {
-  //     removeLetters(inputChar);
-
-  //     var chars = wordHolder.children;
-  //     for (var i = 0; i < chars.length; i++) {
-  //       if (inputChar == chars[i].textContent) {
-  //         chars[i].classList.remove("hidden");
-  //       }
-  //     }
-  //     return true;
-  //   }
-  // }
-  // updateGame();
-  // //game is updated and if a letter is incorrect it is written to the Incorrect letters array and displayed on the page
-  // var incorrectLet = document.createElement("p");
-  // incorrectLet.innerHTML = inputChar;
-  // wrongLetters.appendChild(incorrectLet);
-  // return false;
-
   // Convert the pressed key to uppercase if needed
   inputChar = inputChar.toUpperCase();
 
@@ -218,6 +202,9 @@ function checkAnswer(inputChar) {
     if (roundWord.length === 0) {
       setTimeout(() => {
         winDisplay();
+        // Increment and store wins
+        wins++;
+        localStorage.setItem('hangmanWins', wins);
       }, 850);
     }
 
@@ -313,6 +300,21 @@ function reloadPage() {
   window.location.reload();
 }
 
+function resetWins() {
+  // Reset wins to 0
+  wins = 0;
+  localStorage.setItem('hangmanWins', wins);
+
+  // Update win display
+  winRecord();
+
+  // Remove focus from the reset button
+  resetBtn.blur();
+}
+
+//Event listener for reset button
+resetBtn.addEventListener("click", resetWins);
+
 // Event listener for the "One More Final" button
 oneMoreFinalBtn.addEventListener("click", reloadPage);
 
@@ -324,3 +326,5 @@ hintBtn.addEventListener("click", displayHint);
 
 //this event listener listens to the begin button and calls functions to begin the game
 startButton.addEventListener("click", startGame);
+
+winRecord();
