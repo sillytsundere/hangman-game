@@ -1,9 +1,3 @@
-/* body {
-    background-image: url(../images/the-perfect-freedom.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
-
 /* #main {
     display: flex;
     flex-wrap: nowrap;
@@ -60,20 +54,22 @@
     width: 100%;
 } */
 
-/* #wrong-letters {
+#wrong-letters {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-} */
+}
 
-/* .char {
-    this is the class for the letter buttons
+.char {
+    /* this is the class for the letter buttons */
     color: white;
     background-color: black;
     border: none;
     margin: 2px;
     border-radius: 3px;
-} */
+    height: 40px;
+    width: 40px;
+}
 
 .underline {
     display: inline-block;
@@ -86,7 +82,40 @@
     color: transparent;
 }
 
+@font-face {
+    font-family: 'EVA_____';
+    src: url('../fonts/EVA_____.woff') format('woff'),
+         url('../fonts/EVA_____.woff2') format('woff2'),
+         url('../fonts/EVA_____.TTF') format('truetype');
+  }
+
 body {
-    background-color: #212122;
+    background-color: #171718;
     color: white;
+    font-family: 'EVA_____', sans-serif;
+    margin: 10px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+
+#header {
+    font-size: xx-large;
+}
+
+@media screen and (max-width: 900px) {
+    #header {
+        font-size: larger;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #header {
+        font-size: medium;
+    }
 }

@@ -6,6 +6,8 @@ const wrongLetters = document.getElementById("wrong-letters");
 const hintText = document.getElementById("hint-text");
 const hintBtn = document.getElementById("hint-btn");
 const header = document.getElementById("header");
+const oneMoreFinalBtn = document.getElementById("win-btn");
+const takeCareBtn = document.getElementById("lose-btn");
 
 var startingMinutes = 30;
 var time = startingMinutes * 60;
@@ -98,7 +100,8 @@ var wordBank = [
 var loseDisplay = function () {
   document.getElementById("main").style.display = "none";
   document.getElementById("lose").style.display = "block";
-  header.textContent = "DANGER";
+  header.textContent = "!!!DANGER!!!";
+  header.setAttribute("style", "color:red");
 };
 
 //hides game display and shows win div if game win condition is met
@@ -106,6 +109,9 @@ var winDisplay = function () {
   document.getElementById("main").style.display = "none";
   document.getElementById("win").style.display = "block";
   header.textContent = "Congratulations!";
+  if (window.innerWidth < 600) {
+    header.setAttribute("style", "font-size:15px");
+  }
 };
 
 //chooses random index for length of word bank array to choose a random word to guess, called upon game start to choose a new word for each new game
@@ -132,9 +138,6 @@ function startGame() {
 
 //displays chosen word on webpage as string of dashes to symbolize how many letters user has to guess and to serve to display correct letters user has guessed
 function writeWord() {
-  // wordStatus = roundWord.map((char) => char.replace(char, " _ "));
-  // console.log(wordStatus, 'word status-the dashed array of the round word');
-  // wordHolder.innerHTML = wordStatus.join('');
   for (var i = 0; i < roundWord.length; i++) {
     var word = document.createElement("span");
     word.classList.add("underline");
@@ -254,6 +257,17 @@ function displayHint() {
 function hideBtn() {
   startButton.setAttribute("style", "display:none");
 }
+
+//function to reload page
+function reloadPage() {
+  window.location.reload();
+}
+
+// Event listener for the "One More Final" button
+oneMoreFinalBtn.addEventListener("click", reloadPage);
+
+// Event listener for the "Take Care of Yourself" button
+takeCareBtn.addEventListener("click", reloadPage);
 
 //event listener for hint button
 hintBtn.addEventListener("click", displayHint);
