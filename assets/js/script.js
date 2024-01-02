@@ -158,6 +158,8 @@ function clickLetters() {
           winDisplay();
         }, 850);
       }
+      // Remove focus from the clicked button
+      this.blur();
     });
   });
 }
@@ -176,26 +178,74 @@ function removeLetters(inputChar) {
 
 //checks if letter user has clicked is in the round word and removes instances of it as well as writes the letter to the display
 function checkAnswer(inputChar) {
-  for (var i = 0; i < roundWord.length; i++) {
-    if (inputChar === roundWord[i]) {
-      removeLetters(inputChar);
 
-      var chars = wordHolder.children;
-      for (var i = 0; i < chars.length; i++) {
-        if (inputChar == chars[i].textContent) {
-          chars[i].classList.remove("hidden");
-        }
+  // inputChar = inputChar.toUpperCase();
+
+  // for (var i = 0; i < roundWord.length; i++) {
+  //   if (inputChar === roundWord[i]) {
+  //     removeLetters(inputChar);
+
+  //     var chars = wordHolder.children;
+  //     for (var i = 0; i < chars.length; i++) {
+  //       if (inputChar == chars[i].textContent) {
+  //         chars[i].classList.remove("hidden");
+  //       }
+  //     }
+  //     return true;
+  //   }
+  // }
+  // updateGame();
+  // //game is updated and if a letter is incorrect it is written to the Incorrect letters array and displayed on the page
+  // var incorrectLet = document.createElement("p");
+  // incorrectLet.innerHTML = inputChar;
+  // wrongLetters.appendChild(incorrectLet);
+  // return false;
+
+  // Convert the pressed key to uppercase if needed
+  inputChar = inputChar.toUpperCase();
+
+  // Check if the pressed key is in the round word
+  if (roundWord.includes(inputChar)) {
+    removeLetters(inputChar);
+
+    var chars = wordHolder.children;
+    for (var i = 0; i < chars.length; i++) {
+      if (inputChar == chars[i].textContent) {
+        chars[i].classList.remove("hidden");
       }
-      return true;
     }
+
+    if (roundWord.length === 0) {
+      setTimeout(() => {
+        winDisplay();
+      }, 850);
+    }
+
+    return true;
+  } else {
+    // If the pressed key is not in the round word
+    updateGame();
+    // Game is updated, and if a letter is incorrect, it is written to the Incorrect letters array and displayed on the page
+    var incorrectLet = document.createElement("p");
+    incorrectLet.innerHTML = inputChar;
+    wrongLetters.appendChild(incorrectLet);
+
+    if (turns <= 0) {
+      loseDisplay();
+    }
+
+    return false;
   }
-  updateGame();
-  //game is updated and if a letter is incorrect it is written to the Incorrect letters array and displayed on the page
-  var incorrectLet = document.createElement("p");
-  incorrectLet.innerHTML = inputChar;
-  wrongLetters.appendChild(incorrectLet);
-  return false;
 }
+
+// Add an event listener to the document to listen for keydown events
+document.addEventListener('keydown', function (event) {
+  // Check if the pressed key is a letter
+  if (/^[a-zA-Z]$/.test(event.key)) {
+    // Call the checkAnswer function with the pressed letter
+    checkAnswer(event.key.toUpperCase()); // Convert to uppercase if needed
+  }
+});
 
 function updateGame() {
   turns--;
