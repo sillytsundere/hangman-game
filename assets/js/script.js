@@ -10,7 +10,7 @@ const oneMoreFinalBtn = document.getElementById("win-btn");
 const takeCareBtn = document.getElementById("lose-btn");
 const resetBtn = document.getElementById("reset");
 
-var startingMinutes = 30;
+var startingMinutes = 7;
 var time = startingMinutes * 60;
 let wordIndex;
 let turns;

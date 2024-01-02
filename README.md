@@ -1,10 +1,6 @@
-# Module 04 Mini-Project: Word Guess
+# Hangman Game
 
-In this activity, you will work with a group to build a game using JavaScript and Web APIs.
-
-## Instructions
-
-The completed application should meet the following criteria:
+## Acceptance Criteria
 
 - As a user, I want to start the game by clicking on a button.
 
@@ -14,9 +10,9 @@ The completed application should meet the following criteria:
 
 - As a user, I want to win the game when I have guessed all the letters in the word.
 
-- As a user, I want to lose the game when the timer runs out before I have guessed all the letters.
+- As a user, I want to lose the game when the timer runs out before I have guessed all the letters or if I have run out of guesses.
 
-- As a user, I want to see my total wins and losses on the screen.
+- As a user, I want to see my total wins and on the screen.
 
 ### Specifications
 
@@ -26,40 +22,34 @@ The completed application should meet the following criteria:
 
 - When a user wins or loses a game, a message should appear and the timer should stop.
 
-- When a user clicks the start button, the timer should reset.
+- When a user clicks the start button, the timer should begins. Resets in the case of a user starting a new game.
 
-- When a user refreshes or returns to the brower page, the win and loss counts should persist.
+- When a user refreshes or returns to the brower page, the win counts should persist.
 
-## 💡 Notes
+## Usage
+Users can play a simple hangman game by clicking the "Begin" button. Users must guess the word by clicking or typing letters to spell the correct word. The game is themed with words/names from the anime Neon Genesis Evangelion. 
 
-Refer to the documentation:
+Users have 7 lives, meaning if they guess a letter incorrectly 7 times then they lose. The game is also timed and the user must guess the word correctly within the alotted time or they will lose. The number of times a user has won will display at the top of the page and will persist in local storage until the user clicks the "Reset" button to reset their win count. 
 
-- [MDN Web Docs on KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent)
+Users can click the "Need a hint" button to be given a succinct hint about the word they are guessing. These are largely helpful if you have seen the show and are familiar with the show's meme culture. 
 
-- [MDN Web Docs on Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+![Home Page before game starts](assets/images/before-game-start.png)
 
-- [MDN Web Docs on loops and iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration)
+![Screenshot of game being played](assets/images/mid-game-shot.png)
 
-- [MDN Web Docs on setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)
+## Credits
 
-- [MDN Web Docs on clearInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval)
+Font sourced from https://www.fonts4free.net/eva-font.html
 
-- [MDN Web Docs on localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+## License
+MIT License
 
-## 🏆 Bonus
+## Badges
 
-If you have completed this activity, work through the following challenge with your group to further your knowledge:
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
-- How can you add a reset button to set the win and loss counts back to zero?
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-Use [Google](https://www.google.com) or another search engine to research this.
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 
----
-
-making a test change
-
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
-
-*
-******
-eva font site https://www.fonts4free.net/eva-font.html
+![BootStrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
